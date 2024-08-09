@@ -11,8 +11,17 @@ from pydantic import BaseModel
 from typing import List
 from datetime import datetime
 
-app = FastAPI()
+from commander.app.api.v1.endpoints import users, items, auth
 
+app = FastAPI()
+app.include_router(users.router, prefix="/v1")
+app.include_router(items.router, prefix="/v1")
+app.include_router(auth.router, prefix="/v1")
+
+# 注册 v2 版本的 API 路由
+# app.include_router(v2_users.router, prefix="/v2")
+# app.include_router(v2_items.router, prefix="/v2")
+# app.include_router(v2_orders.router, prefix="/v2")
 class Task(BaseModel):
     id: str
     description: str
