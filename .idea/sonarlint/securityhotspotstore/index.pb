@@ -86,3 +86,5 @@ D
 commander/app/app.py,c\3\c36f231ec2d52fbf50d30ca90b7d779a9058f136
 V
 &commander/app/api/v1/endpoints/auth.py,4\1\41c4698425e45a28cf752c1a41ea5e68e8248b3b
+E
+commander/__init__.py,8\f\8fc956a42f109c476fc08bfeaf9c6be106fb5093
