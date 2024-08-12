@@ -4,16 +4,37 @@ LastEditors: 牛智超
 LastEditTime: 2024-08-06 14:21:15
 FilePath: \tbScripte\commander\app\app.py
 '''
+import os
 import pika
 import uuid
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
 from datetime import datetime
+from dotenv import load_dotenv
 
 from commander.app.api.v1.endpoints import users, items, auth
+# 从环境变量中获取模式
+load_dotenv()
+env = os.getenv("ENV", "development")
+# 根据环境变量设置不同的应用配置
+if env == "production":
+    app = FastAPI(
+        openapi_url=None,  # 禁用 OpenAPI 规范文档
+        docs_url=None,     # 禁用 Swagger UI 文档界面
+        redoc_url=None     # 禁用 ReDoc 文档界面
+    )
+elif env == "testing":
+    app = FastAPI(
+        docs_url="/docs",     # 允许使用 Swagger UI 文档界面
+        redoc_url=None        # 禁用 ReDoc 文档界面
+    )
+else:  # development
+    app = FastAPI(
+        docs_url="/docs",    # 允许使用 Swagger UI 文档界面
+        redoc_url="/redoc"   # 允许使用 ReDoc 文档界面
+    )
 
-app = FastAPI()
 app.include_router(users.router, prefix="/v1")
 app.include_router(items.router, prefix="/v1")
 app.include_router(auth.router, prefix="/v1")

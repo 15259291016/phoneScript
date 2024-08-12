@@ -39,13 +39,13 @@ class Company(CompanyBase):
         orm_mode = True
 
 
-class User(Base):
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True, nullable=True)
-    phone_number = Column(String, unique=True, index=True, nullable=True)
-    is_email_verified = Column(Boolean, default=False)
-    is_phone_verified = Column(Boolean, default=False)
-    hashed_password = Column(String)
+# class User(Base):
+#     id = Column(Integer, primary_key=True, index=True)
+#     email = Column(String, unique=True, index=True, nullable=True)
+#     phone_number = Column(String, unique=True, index=True, nullable=True)
+#     is_email_verified = Column(Boolean, default=False)
+#     is_phone_verified = Column(Boolean, default=False)
+#     hashed_password = Column(String)
 
 
 # class UserCreate(BaseModel):

@@ -10,7 +10,7 @@ from commander.app.db.session import SessionLocal
 from commander.app.core.config import settings
 from commander.app.core.security import oauth2_scheme
 from commander.app.models.user import User
-from commander.app.crud.crud_user import crud_user
+from commander.app.crud import crud_user
 
 # 获取数据库会话
 def get_db() -> Generator:
@@ -29,7 +29,7 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    user = crud_user.get(db, id=user_id)
+    user = crud_user.get_user(db, id=user_id)
     if user is None:
         raise credentials_exception
     return user
